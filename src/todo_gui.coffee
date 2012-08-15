@@ -3,23 +3,27 @@ class WebGui
     $("#new-todo").keypress((event) => @keyPressed(event))
     $("#toggle-all").click( => @completeAllTasksClicked())
 
-  showTasks: (tasks) =>
-    source = $("#item-template").html();
+  addNewTask: (task) =>
+    source = $("#todo-template").html()
     template = Handlebars.compile(source)
-    data = {tasks : tasks.map( (task) -> {id: task.id, content: task.content, completed: task.completed})}
+    data = {content: task.content, completed: task.completed}
     html = template(data)
-    $("#todo-list").html(html)
+    dom = $(html)
+    $("#todo-list").append(dom)
 
+    dom.find(".destroy-task-button").click( => @deleteTaskClicked(task, dom))
+    dom.find(".complete-task-button").click( => @toggleTaskCompletionClicked(task))
+
+  deleteTaskClicked: (task, dom) =>
+    dom.remove()
+
+  loadAllTasks: (tasks) =>
     for task in tasks
-      do (task) =>
-        $("#destroy-task-#{task.id}").click( => @deleteTaskClicked(task.id))
-        $("#complete-task-button-#{task.id}").click( => @toggleTaskCompletionClicked(task.id))
-        
-  deleteTaskClicked: (taskId) =>
+      @addNewTask(task)
 
   completeAllTasksClicked: =>
 
-  toggleTaskCompletionClicked: (taskId) =>
+  toggleTaskCompletionClicked: (task) =>
 
   keyPressed: (event) =>
     ENTER_KEY_CODE = 13
@@ -27,7 +31,8 @@ class WebGui
       @enterKeyPressed(@newTodoContent())
       @clearNewTodoTextBox()
 
-  clearNewTodoTextBox: =>   $("#new-todo").val("")
+  clearNewTodoTextBox: =>
+    $("#new-todo").val("")
 
   newTodoContent: =>
     $("#new-todo").val()

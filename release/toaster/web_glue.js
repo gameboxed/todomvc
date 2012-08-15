@@ -15,15 +15,19 @@ WebGlue = (function() {
       _this.id2Task[task.id] = task;
       return task;
     });
-    AfterAll(this.useCase, ['start', 'addNewTask', 'deleteTask', 'toggleTaskCompletion', 'completeAllTasks'], function() {
-      return _this.gui.showTasks(_this.useCase.todoTasks);
-    });
     After(this.gui, 'enterKeyPressed', function(content) {
       return _this.useCase.addNewTask(_this.storage.newTask(content));
+    });
+    Around(this.useCase, 'addNewTask', function(proceed, task) {
+      _this.gui.addNewTask(task);
+      return proceed(task);
     });
     AutoBind(this.gui, this.useCase);
     Before(this.useCase, 'start', function() {
       return _this.useCase.setInitialTasks(_this.storage.getTasks());
+    });
+    After(this.useCase, 'start', function() {
+      return _this.gui.loadAllTasks(_this.storage.getTasks());
     });
     AfterAll(this.useCase, ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'], function() {
       return _this.storage.set("tasks", _this.useCase.todoTasks);
@@ -31,12 +35,6 @@ WebGlue = (function() {
     LogAll(this.useCase);
     LogAll(this.gui);
     LogAll(this.storage);
-    Around(this.useCase, 'deleteTask', function(proceed, taskId) {
-      return proceed(_this.id2Task[taskId]);
-    });
-    Around(this.useCase, 'toggleTaskCompletion', function(proceed, taskId) {
-      return proceed(_this.id2Task[taskId]);
-    });
   }
 
   return WebGlue;

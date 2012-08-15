@@ -23,28 +23,26 @@
 		<footer id="footer"></div>
 	</section>
 
-	<script type="x-handlebars-template" id="item-template">
-    {{#each tasks }}
+  <script type="x-handlebars-template" id="todo-template">
+    {{#if completed}}
+      <li class="completed">
+    {{else}}
+      <li>
+    {{/if}}
+    <div class="view">
       {{#if completed}}
-        <li class="completed">
+        <input class="toggle complete-task-button" type="checkbox" checked="checked"/>
       {{else}}
-        <li>
+        <input class="toggle complete-task-button" type="checkbox" />
       {{/if}}
-        <div class="view">
-          {{#if completed}}
-            <input id="complete-task-button-{{id}}" class="toggle" type="checkbox" checked="checked"/>
-          {{else}}
-            <input id="complete-task-button-{{id}}" class="toggle" type="checkbox" />
-          {{/if}}
 
-          <label>{{ content }}</label>
-            <button class="destroy" id="destroy-task-{{id}}"></button>
-        </div>
-        <!-- <input class="edit" type="text" value="{{ content }}" /> -->
-      </li>
-    {{/each}}
-	</script>
-	
+      <label>{{ content }}</label>
+      <button class="destroy destroy-task-button"></button>
+    </div>
+    <!-- <input class="edit" type="text" value="{{ content }}" /> -->
+    </li>
+  </script>
+
 	<script type="x-handlebars-template" id="stats-template">
 		<span id="todo-count"><strong><%= remaining %></strong> <%= remaining == 1 ? 'item' : 'items' %> left</span>
 		<ul id="filters">

@@ -16,9 +16,11 @@ WebGui = (function() {
 
     this.completeAllTasksClicked = __bind(this.completeAllTasksClicked, this);
 
+    this.loadAllTasks = __bind(this.loadAllTasks, this);
+
     this.deleteTaskClicked = __bind(this.deleteTaskClicked, this);
 
-    this.showTasks = __bind(this.showTasks, this);
+    this.addNewTask = __bind(this.addNewTask, this);
 
     var _this = this;
     $("#new-todo").keypress(function(event) {
@@ -29,42 +31,43 @@ WebGui = (function() {
     });
   }
 
-  WebGui.prototype.showTasks = function(tasks) {
-    var data, html, source, task, template, _i, _len, _results,
+  WebGui.prototype.addNewTask = function(task) {
+    var data, dom, html, source, template,
       _this = this;
-    source = $("#item-template").html();
+    source = $("#todo-template").html();
     template = Handlebars.compile(source);
     data = {
-      tasks: tasks.map(function(task) {
-        return {
-          id: task.id,
-          content: task.content,
-          completed: task.completed
-        };
-      })
+      content: task.content,
+      completed: task.completed
     };
     html = template(data);
-    $("#todo-list").html(html);
+    dom = $(html);
+    $("#todo-list").append(dom);
+    dom.find(".destroy-task-button").click(function() {
+      return _this.deleteTaskClicked(task, dom);
+    });
+    return dom.find(".complete-task-button").click(function() {
+      return _this.toggleTaskCompletionClicked(task);
+    });
+  };
+
+  WebGui.prototype.deleteTaskClicked = function(task, dom) {
+    return dom.remove();
+  };
+
+  WebGui.prototype.loadAllTasks = function(tasks) {
+    var task, _i, _len, _results;
     _results = [];
     for (_i = 0, _len = tasks.length; _i < _len; _i++) {
       task = tasks[_i];
-      _results.push((function(task) {
-        $("#destroy-task-" + task.id).click(function() {
-          return _this.deleteTaskClicked(task.id);
-        });
-        return $("#complete-task-button-" + task.id).click(function() {
-          return _this.toggleTaskCompletionClicked(task.id);
-        });
-      })(task));
+      _results.push(this.addNewTask(task));
     }
     return _results;
   };
 
-  WebGui.prototype.deleteTaskClicked = function(taskId) {};
-
   WebGui.prototype.completeAllTasksClicked = function() {};
 
-  WebGui.prototype.toggleTaskCompletionClicked = function(taskId) {};
+  WebGui.prototype.toggleTaskCompletionClicked = function(task) {};
 
   WebGui.prototype.keyPressed = function(event) {
     var ENTER_KEY_CODE;
