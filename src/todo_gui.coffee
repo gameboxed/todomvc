@@ -4,7 +4,7 @@ class WebGui
     $("#toggle-all").click( => @completeAllTasksClicked())
     @taskElements = []
 
-  getElementFor: (task, templateId) =>
+  createElementFor: (task, templateId) =>
     source = $(templateId).html()
     template = Handlebars.compile(source)
     data = {content: task.content, completed: task.completed}
@@ -12,7 +12,7 @@ class WebGui
     element = $(html)
 
   addNewTask: (task) =>
-    element = @getElementFor(task, "#todo-template")
+    element = @createElementFor(task, "#todo-template")
     element.task = task
     @taskElements.push(element)
     $("#todo-list").append(element)
@@ -26,6 +26,11 @@ class WebGui
 
   deleteTaskClicked: (task) =>
   deleteTask: (task) => @findTaskElement(task).remove()
+
+  completeTask: (task) =>
+    element = @findTaskElement(task)
+    element.find("li").addClass("completed")
+    element.find("input .toggle").checked = "checked"
 
   showAllTasks: (tasks) =>
     for task in tasks

@@ -22,6 +22,7 @@ WebGlue = (function() {
       return _this.storage.set("tasks", _this.useCase.todoTasks);
     });
     After(this.useCase, 'deleteTask', this.gui.deleteTask);
+    After(this.useCase, 'completeTask', this.gui.completeTask);
     LogAll(this.useCase);
     LogAll(this.gui);
     LogAll(this.storage);

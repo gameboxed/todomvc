@@ -18,6 +18,8 @@ WebGui = (function() {
 
     this.showAllTasks = __bind(this.showAllTasks, this);
 
+    this.completeTask = __bind(this.completeTask, this);
+
     this.deleteTask = __bind(this.deleteTask, this);
 
     this.deleteTaskClicked = __bind(this.deleteTaskClicked, this);
@@ -26,7 +28,7 @@ WebGui = (function() {
 
     this.addNewTask = __bind(this.addNewTask, this);
 
-    this.getElementFor = __bind(this.getElementFor, this);
+    this.createElementFor = __bind(this.createElementFor, this);
 
     var _this = this;
     $("#new-todo").keypress(function(event) {
@@ -38,7 +40,7 @@ WebGui = (function() {
     this.taskElements = [];
   }
 
-  WebGui.prototype.getElementFor = function(task, templateId) {
+  WebGui.prototype.createElementFor = function(task, templateId) {
     var data, element, html, source, template;
     source = $(templateId).html();
     template = Handlebars.compile(source);
@@ -53,7 +55,7 @@ WebGui = (function() {
   WebGui.prototype.addNewTask = function(task) {
     var element,
       _this = this;
-    element = this.getElementFor(task, "#todo-template");
+    element = this.createElementFor(task, "#todo-template");
     element.task = task;
     this.taskElements.push(element);
     $("#todo-list").append(element);
@@ -75,6 +77,13 @@ WebGui = (function() {
 
   WebGui.prototype.deleteTask = function(task) {
     return this.findTaskElement(task).remove();
+  };
+
+  WebGui.prototype.completeTask = function(task) {
+    var element;
+    element = this.findTaskElement(task);
+    element.find("li").addClass("completed");
+    return element.find("input .toggle").checked = "checked";
   };
 
   WebGui.prototype.showAllTasks = function(tasks) {

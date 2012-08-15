@@ -18,10 +18,15 @@ class CompleteTasksUseCase
 
   toggleTaskCompletion: (task) =>
     if task.completed
-      task.uncomplete()
+      @uncompleteTask(task)
     else
-      task.complete()
+      @completeTask(task)
 
+  completeTask: (task) =>
+    task.complete()
+
+  uncompleteTask: (task) =>
+    task.uncomplete()
 
 class Task
   constructor: (@content, @completed=false) ->
