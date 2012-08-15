@@ -21,3 +21,14 @@ class CompleteTasksUseCase
       task.uncomplete()
     else
       task.complete()
+
+
+class Task
+  constructor: (@content, @completed=false) ->
+
+  complete: =>
+    @completed = true
+
+  uncomplete: =>
+    @completed = false
+

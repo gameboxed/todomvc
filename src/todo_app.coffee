@@ -4,15 +4,6 @@
 #<< todo_gui
 #<< web_glue
 
-class Task
-  constructor: (@content, @completed=false) ->
-
-  complete: =>
-    @completed = true
-
-  uncomplete: =>
-    @completed = false
-
 class WebTodoApp
   constructor: ->
     useCase = new CompleteTasksUseCase()

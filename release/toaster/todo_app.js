@@ -1,28 +1,4 @@
-var Task, WebTodoApp,
-  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-Task = (function() {
-
-  function Task(content, completed) {
-    this.content = content;
-    this.completed = completed != null ? completed : false;
-    this.uncomplete = __bind(this.uncomplete, this);
-
-    this.complete = __bind(this.complete, this);
-
-  }
-
-  Task.prototype.complete = function() {
-    return this.completed = true;
-  };
-
-  Task.prototype.uncomplete = function() {
-    return this.completed = false;
-  };
-
-  return Task;
-
-})();
+var WebTodoApp;
 
 WebTodoApp = (function() {
 
