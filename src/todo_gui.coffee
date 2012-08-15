@@ -32,6 +32,11 @@ class WebGui
     element.addClass("completed")
     element.find("input .toggle").attr("checked", "checked")
 
+  uncompleteTask: (task) =>
+    element = @findTaskElement(task)
+    element.removeClass("completed")
+    element.find("input .toggle").attr("checked", "")
+
   showAllTasks: (tasks) =>
     for task in tasks
       @addNewTask(task)

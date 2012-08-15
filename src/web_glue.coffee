@@ -12,6 +12,7 @@ class WebGlue
     After(@useCase, 'deleteTask', @gui.deleteTask)
 
     After(@useCase, 'completeTask', @gui.completeTask)
+    After(@useCase, 'uncompleteTask', @gui.uncompleteTask)
 
 
     LogAll(@useCase)

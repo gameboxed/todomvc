@@ -23,6 +23,7 @@ WebGlue = (function() {
     });
     After(this.useCase, 'deleteTask', this.gui.deleteTask);
     After(this.useCase, 'completeTask', this.gui.completeTask);
+    After(this.useCase, 'uncompleteTask', this.gui.uncompleteTask);
     LogAll(this.useCase);
     LogAll(this.gui);
     LogAll(this.storage);

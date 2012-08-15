@@ -18,6 +18,8 @@ WebGui = (function() {
 
     this.showAllTasks = __bind(this.showAllTasks, this);
 
+    this.uncompleteTask = __bind(this.uncompleteTask, this);
+
     this.completeTask = __bind(this.completeTask, this);
 
     this.deleteTask = __bind(this.deleteTask, this);
@@ -84,6 +86,13 @@ WebGui = (function() {
     element = this.findTaskElement(task);
     element.addClass("completed");
     return element.find("input .toggle").attr("checked", "checked");
+  };
+
+  WebGui.prototype.uncompleteTask = function(task) {
+    var element;
+    element = this.findTaskElement(task);
+    element.removeClass("completed");
+    return element.find("input .toggle").attr("checked", "");
   };
 
   WebGui.prototype.showAllTasks = function(tasks) {
