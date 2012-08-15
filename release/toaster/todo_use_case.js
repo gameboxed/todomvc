@@ -4,20 +4,6 @@ var CompleteTasksUseCase, Task,
 CompleteTasksUseCase = (function() {
 
   function CompleteTasksUseCase() {
-    this.uncompleteTask = __bind(this.uncompleteTask, this);
-
-    this.completeTask = __bind(this.completeTask, this);
-
-    this.toggleTaskCompletion = __bind(this.toggleTaskCompletion, this);
-
-    this.completeAllTasks = __bind(this.completeAllTasks, this);
-
-    this.deleteTask = __bind(this.deleteTask, this);
-
-    this.updateTaskContent = __bind(this.updateTaskContent, this);
-
-    this.editTaskContent = __bind(this.editTaskContent, this);
-
     this.addNewTask = __bind(this.addNewTask, this);
 
     this.start = __bind(this.start, this);
@@ -34,39 +20,6 @@ CompleteTasksUseCase = (function() {
 
   CompleteTasksUseCase.prototype.addNewTask = function(task) {
     return this.todoTasks.push(task);
-  };
-
-  CompleteTasksUseCase.prototype.editTaskContent = function(task) {};
-
-  CompleteTasksUseCase.prototype.updateTaskContent = function(task, content) {
-    return task.content = content;
-  };
-
-  CompleteTasksUseCase.prototype.deleteTask = function(task) {
-    return this.todoTasks.remove(task);
-  };
-
-  CompleteTasksUseCase.prototype.completeAllTasks = function() {
-    var _this = this;
-    return this.todoTasks.map(function(task) {
-      return _this.completeTask(task);
-    });
-  };
-
-  CompleteTasksUseCase.prototype.toggleTaskCompletion = function(task) {
-    if (task.completed) {
-      return this.uncompleteTask(task);
-    } else {
-      return this.completeTask(task);
-    }
-  };
-
-  CompleteTasksUseCase.prototype.completeTask = function(task) {
-    return task.complete();
-  };
-
-  CompleteTasksUseCase.prototype.uncompleteTask = function(task) {
-    return task.uncomplete();
   };
 
   return CompleteTasksUseCase;

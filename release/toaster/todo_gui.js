@@ -12,29 +12,7 @@ WebGui = (function() {
 
     this.keyPressed = __bind(this.keyPressed, this);
 
-    this.toggleTaskCompletionClicked = __bind(this.toggleTaskCompletionClicked, this);
-
-    this.completeAllTasksClicked = __bind(this.completeAllTasksClicked, this);
-
     this.showAllTasks = __bind(this.showAllTasks, this);
-
-    this.uncompleteTask = __bind(this.uncompleteTask, this);
-
-    this.completeTask = __bind(this.completeTask, this);
-
-    this.updateTaskContent = __bind(this.updateTaskContent, this);
-
-    this.enterKeyPressedWhenEditing = __bind(this.enterKeyPressedWhenEditing, this);
-
-    this.editingKeyPressed = __bind(this.editingKeyPressed, this);
-
-    this.editTaskContent = __bind(this.editTaskContent, this);
-
-    this.deleteTask = __bind(this.deleteTask, this);
-
-    this.deleteTaskClicked = __bind(this.deleteTaskClicked, this);
-
-    this.taskContentDoubleClicked = __bind(this.taskContentDoubleClicked, this);
 
     this.findTaskElement = __bind(this.findTaskElement, this);
 
@@ -45,9 +23,6 @@ WebGui = (function() {
     var _this = this;
     $("#new-todo").keypress(function(event) {
       return _this.keyPressed(event);
-    });
-    $("#toggle-all").click(function() {
-      return _this.completeAllTasksClicked();
     });
     this.taskElements = [];
   }
@@ -65,76 +40,17 @@ WebGui = (function() {
   };
 
   WebGui.prototype.addNewTask = function(task) {
-    var element,
-      _this = this;
+    var element;
     element = this.createElementFor(task, "#todo-template");
     element.task = task;
     this.taskElements.push(element);
-    $("#todo-list").append(element);
-    element.find(".destroy").click(function() {
-      return _this.deleteTaskClicked(task);
-    });
-    element.find(".toggle").click(function() {
-      return _this.toggleTaskCompletionClicked(task);
-    });
-    return element.dblclick(function() {
-      return _this.taskContentDoubleClicked(task);
-    });
+    return $("#todo-list").append(element);
   };
 
   WebGui.prototype.findTaskElement = function(task) {
     return this.taskElements.find(function(taskElement) {
       return taskElement.task === task;
     });
-  };
-
-  WebGui.prototype.taskContentDoubleClicked = function(task) {};
-
-  WebGui.prototype.deleteTaskClicked = function(task) {};
-
-  WebGui.prototype.deleteTask = function(task) {
-    return this.findTaskElement(task).remove();
-  };
-
-  WebGui.prototype.editTaskContent = function(task) {
-    var element,
-      _this = this;
-    element = this.findTaskElement(task);
-    element.addClass("editing").find("input.edit").show().select().focus();
-    return element.find("input.edit").keypress(function(event) {
-      return _this.editingKeyPressed(event, element);
-    });
-  };
-
-  WebGui.prototype.editingKeyPressed = function(event, element) {
-    var ENTER_KEY_CODE;
-    ENTER_KEY_CODE = 13;
-    if (event.keyCode === ENTER_KEY_CODE) {
-      return this.enterKeyPressedWhenEditing(element.task, element.find("input.edit").val());
-    }
-  };
-
-  WebGui.prototype.enterKeyPressedWhenEditing = function(task, newContent) {};
-
-  WebGui.prototype.updateTaskContent = function(task, content) {
-    var element;
-    element = this.findTaskElement(task);
-    element.removeClass("editing").find("input.edit").hide();
-    return element.find("label").html(content);
-  };
-
-  WebGui.prototype.completeTask = function(task) {
-    var element;
-    element = this.findTaskElement(task);
-    element.addClass("completed");
-    return element.find("input.toggle").attr("checked", "checked");
-  };
-
-  WebGui.prototype.uncompleteTask = function(task) {
-    var element;
-    element = this.findTaskElement(task);
-    element.removeClass("completed");
-    return element.find("input .toggle").attr("checked", "");
   };
 
   WebGui.prototype.showAllTasks = function(tasks) {
@@ -146,10 +62,6 @@ WebGui = (function() {
     }
     return _results;
   };
-
-  WebGui.prototype.completeAllTasksClicked = function() {};
-
-  WebGui.prototype.toggleTaskCompletionClicked = function(task) {};
 
   WebGui.prototype.keyPressed = function(event) {
     var ENTER_KEY_CODE;
