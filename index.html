@@ -31,13 +31,13 @@
     {{/if}}
     <div class="view">
       {{#if completed}}
-        <input class="toggle complete-task-button" type="checkbox" checked="checked"/>
+        <input class="toggle" type="checkbox" checked="checked"/>
       {{else}}
-        <input class="toggle complete-task-button" type="checkbox" />
+        <input class="toggle" type="checkbox" />
       {{/if}}
 
       <label>{{ content }}</label>
-      <button class="destroy destroy-task-button"></button>
+      <button class="destroy"></button>
     </div>
     <!-- <input class="edit" type="text" value="{{ content }}" /> -->
     </li>

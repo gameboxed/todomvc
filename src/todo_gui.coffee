@@ -17,8 +17,8 @@ class WebGui
     @taskElements.push(element)
     $("#todo-list").append(element)
 
-    element.find(".destroy-task-button").click( => @deleteTaskClicked(task))
-    element.find(".complete-task-button").click( => @toggleTaskCompletionClicked(task))
+    element.find(".destroy").click( => @deleteTaskClicked(task))
+    element.find(".toggle").click( => @toggleTaskCompletionClicked(task))
 
   findTaskElement: (task) => @taskElements.find((taskElement) -> taskElement.task == task)
 
@@ -30,7 +30,7 @@ class WebGui
   completeTask: (task) =>
     element = @findTaskElement(task)
     element.addClass("completed")
-    element.find("input .toggle").attr("checked", "checked")
+    element.find("input.toggle").attr("checked", "checked")
 
   uncompleteTask: (task) =>
     element = @findTaskElement(task)

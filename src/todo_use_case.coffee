@@ -14,7 +14,7 @@ class CompleteTasksUseCase
     @todoTasks.splice(@todoTasks.indexOf(task), 1)
 
   completeAllTasks: =>
-    @todoTasks.map((task) -> task.complete())
+    @todoTasks.map((task) => @completeTask(task))
 
   toggleTaskCompletion: (task) =>
     if task.completed

@@ -61,10 +61,10 @@ WebGui = (function() {
     element.task = task;
     this.taskElements.push(element);
     $("#todo-list").append(element);
-    element.find(".destroy-task-button").click(function() {
+    element.find(".destroy").click(function() {
       return _this.deleteTaskClicked(task);
     });
-    return element.find(".complete-task-button").click(function() {
+    return element.find(".toggle").click(function() {
       return _this.toggleTaskCompletionClicked(task);
     });
   };
@@ -85,7 +85,7 @@ WebGui = (function() {
     var element;
     element = this.findTaskElement(task);
     element.addClass("completed");
-    return element.find("input .toggle").attr("checked", "checked");
+    return element.find("input.toggle").attr("checked", "checked");
   };
 
   WebGui.prototype.uncompleteTask = function(task) {

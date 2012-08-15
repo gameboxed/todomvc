@@ -37,8 +37,9 @@ CompleteTasksUseCase = (function() {
   };
 
   CompleteTasksUseCase.prototype.completeAllTasks = function() {
+    var _this = this;
     return this.todoTasks.map(function(task) {
-      return task.complete();
+      return _this.completeTask(task);
     });
   };
 
