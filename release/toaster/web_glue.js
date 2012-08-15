@@ -7,14 +7,6 @@ WebGlue = (function() {
     this.useCase = useCase;
     this.gui = gui;
     this.storage = storage;
-    this.id2Task = {};
-    Around(this.storage, 'newTask', function(proceed, content, completed) {
-      var task;
-      task = proceed(content, completed);
-      task.id = UUIDjs.create().toString();
-      _this.id2Task[task.id] = task;
-      return task;
-    });
     After(this.gui, 'enterKeyPressed', function(content) {
       return _this.useCase.addNewTask(_this.storage.newTask(content));
     });

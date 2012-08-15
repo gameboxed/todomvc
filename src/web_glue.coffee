@@ -1,13 +1,5 @@
 class WebGlue
   constructor: (@useCase, @gui, @storage)->
-    @id2Task = {}
-    Around(@storage, 'newTask', (proceed, content, completed) =>
-      task = proceed(content, completed)
-      task.id = UUIDjs.create().toString()
-      @id2Task[task.id] = task
-      return task
-    )
-
     After(@gui, 'enterKeyPressed',
       (content) => @useCase.addNewTask(@storage.newTask(content)))
 
