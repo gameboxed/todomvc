@@ -8,7 +8,7 @@ WebGlue = (function() {
     this.gui = gui;
     this.storage = storage;
     After(this.gui, 'enterKeyPressed', function(content) {
-      return _this.useCase.addNewTask(_this.storage.newTask(content));
+      return _this.useCase.addNewTask(new Task(content));
     });
     After(this.useCase, 'addNewTask', this.gui.addNewTask);
     AutoBind(this.gui, this.useCase);

@@ -1,7 +1,6 @@
 class WebGlue
   constructor: (@useCase, @gui, @storage)->
-    After(@gui, 'enterKeyPressed',
-      (content) => @useCase.addNewTask(@storage.newTask(content)))
+    After(@gui, 'enterKeyPressed', (content) => @useCase.addNewTask(new Task(content)))
 
     After(@useCase, 'addNewTask', @gui.addNewTask)
 
