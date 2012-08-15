@@ -114,9 +114,7 @@ WebGui = (function() {
     }
   };
 
-  WebGui.prototype.enterKeyPressedWhenEditing = function(task, newContent) {
-    return console.log("newContent: " + newContent);
-  };
+  WebGui.prototype.enterKeyPressedWhenEditing = function(task, newContent) {};
 
   WebGui.prototype.updateTaskContent = function(task, content) {
     var element;

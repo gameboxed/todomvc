@@ -38,7 +38,6 @@ class WebGui
       @enterKeyPressedWhenEditing(element.task, element.find("input.edit").val())
 
   enterKeyPressedWhenEditing: (task, newContent) =>
-    console.log("newContent: #{newContent}")
 
   updateTaskContent: (task, content) =>
     element = @findTaskElement(task)

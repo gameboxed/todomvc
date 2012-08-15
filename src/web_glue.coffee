@@ -6,7 +6,13 @@ class WebGlue
     Before(@useCase, 'start',  => @useCase.setInitialTasks(@storage.getTasks()))
     After(@useCase, 'start',  => @gui.showAllTasks(@useCase.todoTasks))
     AfterAll(@useCase,
-            ['addNewTask', 'updateTaskContent', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'],
+            [
+             'addNewTask',
+             'updateTaskContent',
+             'deleteTask',
+             'completeAllTasks',
+             'toggleTaskCompletion'
+            ],
             => @storage.set("tasks", @useCase.todoTasks))
 
     After(@useCase, 'deleteTask', @gui.deleteTask)
@@ -20,8 +26,3 @@ class WebGlue
 
     After(@useCase, 'updateTaskContent', @gui.updateTaskContent)
     After(@gui, 'enterKeyPressedWhenEditing', @useCase.updateTaskContent)
-
-    LogAll(@useCase)
-    LogAll(@gui)
-    LogAll(@storage)
-

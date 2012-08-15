@@ -11,10 +11,8 @@ class CompleteTasksUseCase
     @todoTasks.push(task)
 
   editTaskContent: (task) =>
-    console.log("here")
 
   updateTaskContent: (task, content) =>
-    console.log("updateTaskContent with #{content}")
     task.content = content
 
   deleteTask: (task) =>

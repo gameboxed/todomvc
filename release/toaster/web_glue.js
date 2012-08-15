@@ -28,9 +28,6 @@ WebGlue = (function() {
     After(this.gui, 'taskContentDoubleClicked', this.useCase.editTaskContent);
     After(this.useCase, 'updateTaskContent', this.gui.updateTaskContent);
     After(this.gui, 'enterKeyPressedWhenEditing', this.useCase.updateTaskContent);
-    LogAll(this.useCase);
-    LogAll(this.gui);
-    LogAll(this.storage);
   }
 
   return WebGlue;

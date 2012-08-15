@@ -36,12 +36,9 @@ CompleteTasksUseCase = (function() {
     return this.todoTasks.push(task);
   };
 
-  CompleteTasksUseCase.prototype.editTaskContent = function(task) {
-    return console.log("here");
-  };
+  CompleteTasksUseCase.prototype.editTaskContent = function(task) {};
 
   CompleteTasksUseCase.prototype.updateTaskContent = function(task, content) {
-    console.log("updateTaskContent with " + content);
     return task.content = content;
   };
 
