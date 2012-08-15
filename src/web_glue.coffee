@@ -9,6 +9,8 @@ class WebGlue
             ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'],
             => @storage.set("tasks", @useCase.todoTasks))
 
+    After(@useCase, 'deleteTask', @gui.deleteTask)
+
 
     LogAll(@useCase)
     LogAll(@gui)

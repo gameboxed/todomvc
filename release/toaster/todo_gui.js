@@ -18,7 +18,11 @@ WebGui = (function() {
 
     this.showAllTasks = __bind(this.showAllTasks, this);
 
+    this.deleteTask = __bind(this.deleteTask, this);
+
     this.deleteTaskClicked = __bind(this.deleteTaskClicked, this);
+
+    this.findTaskElement = __bind(this.findTaskElement, this);
 
     this.addNewTask = __bind(this.addNewTask, this);
 
@@ -31,6 +35,7 @@ WebGui = (function() {
     $("#toggle-all").click(function() {
       return _this.completeAllTasksClicked();
     });
+    this.taskElements = [];
   }
 
   WebGui.prototype.getElementFor = function(task, templateId) {
@@ -50,6 +55,7 @@ WebGui = (function() {
       _this = this;
     element = this.getElementFor(task, "#todo-template");
     element.task = task;
+    this.taskElements.push(element);
     $("#todo-list").append(element);
     element.find(".destroy-task-button").click(function() {
       return _this.deleteTaskClicked(task);
@@ -59,7 +65,17 @@ WebGui = (function() {
     });
   };
 
+  WebGui.prototype.findTaskElement = function(task) {
+    return this.taskElements.find(function(taskElement) {
+      return taskElement.task === task;
+    });
+  };
+
   WebGui.prototype.deleteTaskClicked = function(task) {};
+
+  WebGui.prototype.deleteTask = function(task) {
+    return this.findTaskElement(task).remove();
+  };
 
   WebGui.prototype.showAllTasks = function(tasks) {
     var task, _i, _len, _results;

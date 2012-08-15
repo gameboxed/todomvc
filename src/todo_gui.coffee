@@ -2,6 +2,7 @@ class WebGui
   constructor: ->
     $("#new-todo").keypress((event) => @keyPressed(event))
     $("#toggle-all").click( => @completeAllTasksClicked())
+    @taskElements = []
 
   getElementFor: (task, templateId) =>
     source = $(templateId).html()
@@ -13,12 +14,18 @@ class WebGui
   addNewTask: (task) =>
     element = @getElementFor(task, "#todo-template")
     element.task = task
+    @taskElements.push(element)
     $("#todo-list").append(element)
 
     element.find(".destroy-task-button").click( => @deleteTaskClicked(task))
     element.find(".complete-task-button").click( => @toggleTaskCompletionClicked(task))
 
+  findTaskElement: (task) => @taskElements.find((taskElement) -> taskElement.task == task)
+
+
+
   deleteTaskClicked: (task) =>
+  deleteTask: (task) => @findTaskElement(task).remove()
 
   showAllTasks: (tasks) =>
     for task in tasks

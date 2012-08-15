@@ -21,6 +21,7 @@ WebGlue = (function() {
     AfterAll(this.useCase, ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'], function() {
       return _this.storage.set("tasks", _this.useCase.todoTasks);
     });
+    After(this.useCase, 'deleteTask', this.gui.deleteTask);
     LogAll(this.useCase);
     LogAll(this.gui);
     LogAll(this.storage);
