@@ -3,19 +3,22 @@ class WebGui
     $("#new-todo").keypress((event) => @keyPressed(event))
     $("#toggle-all").click( => @completeAllTasksClicked())
 
-  addNewTask: (task) =>
-    source = $("#todo-template").html()
+  getElementFor: (task, templateId) =>
+    source = $(templateId).html()
     template = Handlebars.compile(source)
     data = {content: task.content, completed: task.completed}
     html = template(data)
     element = $(html)
+
+  addNewTask: (task) =>
+    element = @getElementFor(task, "#todo-template")
+    element.task = task
     $("#todo-list").append(element)
 
-    element.find(".destroy-task-button").click( => @deleteTaskClicked(task, element))
+    element.find(".destroy-task-button").click( => @deleteTaskClicked(task))
     element.find(".complete-task-button").click( => @toggleTaskCompletionClicked(task))
 
-  deleteTaskClicked: (task, element) =>
-    element.remove()
+  deleteTaskClicked: (task) =>
 
   showAllTasks: (tasks) =>
     for task in tasks

@@ -22,6 +22,8 @@ WebGui = (function() {
 
     this.addNewTask = __bind(this.addNewTask, this);
 
+    this.getElementFor = __bind(this.getElementFor, this);
+
     var _this = this;
     $("#new-todo").keypress(function(event) {
       return _this.keyPressed(event);
@@ -31,29 +33,33 @@ WebGui = (function() {
     });
   }
 
-  WebGui.prototype.addNewTask = function(task) {
-    var data, element, html, source, template,
-      _this = this;
-    source = $("#todo-template").html();
+  WebGui.prototype.getElementFor = function(task, templateId) {
+    var data, element, html, source, template;
+    source = $(templateId).html();
     template = Handlebars.compile(source);
     data = {
       content: task.content,
       completed: task.completed
     };
     html = template(data);
-    element = $(html);
+    return element = $(html);
+  };
+
+  WebGui.prototype.addNewTask = function(task) {
+    var element,
+      _this = this;
+    element = this.getElementFor(task, "#todo-template");
+    element.task = task;
     $("#todo-list").append(element);
     element.find(".destroy-task-button").click(function() {
-      return _this.deleteTaskClicked(task, element);
+      return _this.deleteTaskClicked(task);
     });
     return element.find(".complete-task-button").click(function() {
       return _this.toggleTaskCompletionClicked(task);
     });
   };
 
-  WebGui.prototype.deleteTaskClicked = function(task, element) {
-    return element.remove();
-  };
+  WebGui.prototype.deleteTaskClicked = function(task) {};
 
   WebGui.prototype.showAllTasks = function(tasks) {
     var task, _i, _len, _results;
