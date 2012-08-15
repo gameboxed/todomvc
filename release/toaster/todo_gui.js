@@ -20,8 +20,6 @@ WebGui = (function() {
 
     this.deleteTaskClicked = __bind(this.deleteTaskClicked, this);
 
-    this.refreshTask = __bind(this.refreshTask, this);
-
     this.addNewTask = __bind(this.addNewTask, this);
 
     var _this = this;
@@ -51,11 +49,6 @@ WebGui = (function() {
     return element.find(".complete-task-button").click(function() {
       return _this.toggleTaskCompletionClicked(task);
     });
-  };
-
-  WebGui.prototype.refreshTask = function(task, currentElement) {
-    this.deleteTaskClicked(task, currentElement);
-    return this.addNewTask(task);
   };
 
   WebGui.prototype.deleteTaskClicked = function(task, element) {

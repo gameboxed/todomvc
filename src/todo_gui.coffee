@@ -14,11 +14,6 @@ class WebGui
     element.find(".destroy-task-button").click( => @deleteTaskClicked(task, element))
     element.find(".complete-task-button").click( => @toggleTaskCompletionClicked(task))
 
-  refreshTask: (task, currentElement) =>
-    @deleteTaskClicked(task, currentElement)
-    @addNewTask(task)
-    #todo: move new element to previous currentElement's position
-
   deleteTaskClicked: (task, element) =>
     element.remove()
 
