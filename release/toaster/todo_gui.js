@@ -82,8 +82,8 @@ WebGui = (function() {
   WebGui.prototype.completeTask = function(task) {
     var element;
     element = this.findTaskElement(task);
-    element.find("li").addClass("completed");
-    return element.find("input .toggle").checked = "checked";
+    element.addClass("completed");
+    return element.find("input .toggle").attr("checked", "checked");
   };
 
   WebGui.prototype.showAllTasks = function(tasks) {

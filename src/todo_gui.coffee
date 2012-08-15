@@ -29,8 +29,8 @@ class WebGui
 
   completeTask: (task) =>
     element = @findTaskElement(task)
-    element.find("li").addClass("completed")
-    element.find("input .toggle").checked = "checked"
+    element.addClass("completed")
+    element.find("input .toggle").attr("checked", "checked")
 
   showAllTasks: (tasks) =>
     for task in tasks
