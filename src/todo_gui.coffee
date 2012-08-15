@@ -19,13 +19,39 @@ class WebGui
 
     element.find(".destroy").click( => @deleteTaskClicked(task))
     element.find(".toggle").click( => @toggleTaskCompletionClicked(task))
+    element.dblclick( => @taskContentDoubleClicked(task))
 
   findTaskElement: (task) => @taskElements.find((taskElement) -> taskElement.task == task)
 
 
 
+  taskContentDoubleClicked: (task) =>
+
   deleteTaskClicked: (task) =>
   deleteTask: (task) => @findTaskElement(task).remove()
+
+  editTaskContent: (task) =>
+    element = @findTaskElement(task)
+    element.addClass("editing").find("input.edit").show().select().focus()
+    element.find("input.edit").keypress((event) => @editingKeyPressed(event, element))
+
+  editingKeyPressed: (event, element) =>
+    ENTER_KEY_CODE = 13
+    if event.keyCode == ENTER_KEY_CODE
+      @enterKeyPressedWhenEditing(element.task, element.find("input.edit").val())
+
+  enterKeyPressedWhenEditing: (task, newContent) =>
+    console.log("newContent: #{newContent}")
+
+  updateTaskContent: (task, content) =>
+    element = @findTaskElement(task)
+    element.removeClass("editing").find("input.edit").hide()
+    element.find("label").html(content)
+
+
+
+
+
 
   completeTask: (task) =>
     element = @findTaskElement(task)

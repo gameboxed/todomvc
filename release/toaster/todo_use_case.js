@@ -14,6 +14,10 @@ CompleteTasksUseCase = (function() {
 
     this.deleteTask = __bind(this.deleteTask, this);
 
+    this.updateTaskContent = __bind(this.updateTaskContent, this);
+
+    this.editTaskContent = __bind(this.editTaskContent, this);
+
     this.addNewTask = __bind(this.addNewTask, this);
 
     this.start = __bind(this.start, this);
@@ -30,6 +34,15 @@ CompleteTasksUseCase = (function() {
 
   CompleteTasksUseCase.prototype.addNewTask = function(task) {
     return this.todoTasks.push(task);
+  };
+
+  CompleteTasksUseCase.prototype.editTaskContent = function(task) {
+    return console.log("here");
+  };
+
+  CompleteTasksUseCase.prototype.updateTaskContent = function(task, content) {
+    console.log("updateTaskContent with " + content);
+    return task.content = content;
   };
 
   CompleteTasksUseCase.prototype.deleteTask = function(task) {
