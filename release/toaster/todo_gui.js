@@ -32,7 +32,7 @@ WebGui = (function() {
   }
 
   WebGui.prototype.addNewTask = function(task) {
-    var data, dom, html, source, template,
+    var data, element, html, source, template,
       _this = this;
     source = $("#todo-template").html();
     template = Handlebars.compile(source);
@@ -41,18 +41,18 @@ WebGui = (function() {
       completed: task.completed
     };
     html = template(data);
-    dom = $(html);
-    $("#todo-list").append(dom);
-    dom.find(".destroy-task-button").click(function() {
-      return _this.deleteTaskClicked(task, dom);
+    element = $(html);
+    $("#todo-list").append(element);
+    element.find(".destroy-task-button").click(function() {
+      return _this.deleteTaskClicked(task, element);
     });
-    return dom.find(".complete-task-button").click(function() {
+    return element.find(".complete-task-button").click(function() {
       return _this.toggleTaskCompletionClicked(task);
     });
   };
 
-  WebGui.prototype.deleteTaskClicked = function(task, dom) {
-    return dom.remove();
+  WebGui.prototype.deleteTaskClicked = function(task, element) {
+    return element.remove();
   };
 
   WebGui.prototype.showAllTasks = function(tasks) {

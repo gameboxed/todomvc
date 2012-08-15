@@ -8,14 +8,14 @@ class WebGui
     template = Handlebars.compile(source)
     data = {content: task.content, completed: task.completed}
     html = template(data)
-    dom = $(html)
-    $("#todo-list").append(dom)
+    element = $(html)
+    $("#todo-list").append(element)
 
-    dom.find(".destroy-task-button").click( => @deleteTaskClicked(task, dom))
-    dom.find(".complete-task-button").click( => @toggleTaskCompletionClicked(task))
+    element.find(".destroy-task-button").click( => @deleteTaskClicked(task, element))
+    element.find(".complete-task-button").click( => @toggleTaskCompletionClicked(task))
 
-  deleteTaskClicked: (task, dom) =>
-    dom.remove()
+  deleteTaskClicked: (task, element) =>
+    element.remove()
 
   showAllTasks: (tasks) =>
     for task in tasks
