@@ -16,7 +16,7 @@ WebGui = (function() {
 
     this.completeAllTasksClicked = __bind(this.completeAllTasksClicked, this);
 
-    this.loadAllTasks = __bind(this.loadAllTasks, this);
+    this.showAllTasks = __bind(this.showAllTasks, this);
 
     this.deleteTaskClicked = __bind(this.deleteTaskClicked, this);
 
@@ -55,7 +55,7 @@ WebGui = (function() {
     return dom.remove();
   };
 
-  WebGui.prototype.loadAllTasks = function(tasks) {
+  WebGui.prototype.showAllTasks = function(tasks) {
     var task, _i, _len, _results;
     _results = [];
     for (_i = 0, _len = tasks.length; _i < _len; _i++) {

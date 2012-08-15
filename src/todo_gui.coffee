@@ -17,7 +17,7 @@ class WebGui
   deleteTaskClicked: (task, dom) =>
     dom.remove()
 
-  loadAllTasks: (tasks) =>
+  showAllTasks: (tasks) =>
     for task in tasks
       @addNewTask(task)
 
