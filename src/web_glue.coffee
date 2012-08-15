@@ -13,7 +13,7 @@ class WebGlue
 
     Before(@useCase, 'start',  => @useCase.setInitialTasks(@storage.getTasks()))
 
-    After(@useCase, 'start',  => @gui.loadAllTasks(@storage.getTasks()))
+    After(@useCase, 'start',  => @gui.loadAllTasks(@useCase.todoTasks))
 
     AfterAll(@useCase,
             ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'],

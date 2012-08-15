@@ -19,7 +19,7 @@ WebGlue = (function() {
       return _this.useCase.setInitialTasks(_this.storage.getTasks());
     });
     After(this.useCase, 'start', function() {
-      return _this.gui.loadAllTasks(_this.storage.getTasks());
+      return _this.gui.loadAllTasks(_this.useCase.todoTasks);
     });
     AfterAll(this.useCase, ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'], function() {
       return _this.storage.set("tasks", _this.useCase.todoTasks);
