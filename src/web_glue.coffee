@@ -3,11 +3,7 @@ class WebGlue
     After(@gui, 'enterKeyPressed',
       (content) => @useCase.addNewTask(@storage.newTask(content)))
 
-    Around(@useCase, 'addNewTask',
-      (proceed, task) =>
-        @gui.addNewTask(task)
-        proceed(task)
-    )
+    After(@useCase, 'addNewTask', @gui.addNewTask)
 
     AutoBind(@gui, @useCase)
 

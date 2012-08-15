@@ -10,10 +10,7 @@ WebGlue = (function() {
     After(this.gui, 'enterKeyPressed', function(content) {
       return _this.useCase.addNewTask(_this.storage.newTask(content));
     });
-    Around(this.useCase, 'addNewTask', function(proceed, task) {
-      _this.gui.addNewTask(task);
-      return proceed(task);
-    });
+    After(this.useCase, 'addNewTask', this.gui.addNewTask);
     AutoBind(this.gui, this.useCase);
     Before(this.useCase, 'start', function() {
       return _this.useCase.setInitialTasks(_this.storage.getTasks());
