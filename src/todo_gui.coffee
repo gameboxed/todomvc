@@ -22,9 +22,6 @@ class WebGui
     element.dblclick( => @taskContentDoubleClicked(task))
 
   findTaskElement: (task) => @taskElements.find((taskElement) -> taskElement.task == task)
-
-
-
   taskContentDoubleClicked: (task) =>
 
   deleteTaskClicked: (task) =>
@@ -47,11 +44,6 @@ class WebGui
     element = @findTaskElement(task)
     element.removeClass("editing").find("input.edit").hide()
     element.find("label").html(content)
-
-
-
-
-
 
   completeTask: (task) =>
     element = @findTaskElement(task)
@@ -83,8 +75,4 @@ class WebGui
   newTodoContent: =>
     $("#new-todo").val()
 
-
   enterKeyPressed: (content) =>
-
-
-
