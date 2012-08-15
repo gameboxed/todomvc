@@ -13,14 +13,13 @@ class WebGlue
 
     After(@useCase, 'completeTask', @gui.completeTask)
     After(@useCase, 'uncompleteTask', @gui.uncompleteTask)
-    
+
 
     After(@useCase, 'editTaskContent', @gui.editTaskContent)
     After(@gui, 'taskContentDoubleClicked', @useCase.editTaskContent)
 
     After(@useCase, 'updateTaskContent', @gui.updateTaskContent)
     After(@gui, 'enterKeyPressedWhenEditing', @useCase.updateTaskContent)
-
 
     LogAll(@useCase)
     LogAll(@gui)
