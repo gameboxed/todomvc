@@ -18,7 +18,7 @@ class CompleteTasksUseCase
     task.content = content
 
   deleteTask: (task) =>
-    @todoTasks.splice(@todoTasks.indexOf(task), 1)
+    @todoTasks.remove(task)
 
   completeAllTasks: =>
     @todoTasks.map((task) => @completeTask(task))

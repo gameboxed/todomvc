@@ -46,7 +46,7 @@ CompleteTasksUseCase = (function() {
   };
 
   CompleteTasksUseCase.prototype.deleteTask = function(task) {
-    return this.todoTasks.splice(this.todoTasks.indexOf(task), 1);
+    return this.todoTasks.remove(task);
   };
 
   CompleteTasksUseCase.prototype.completeAllTasks = function() {
