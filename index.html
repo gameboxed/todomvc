@@ -47,13 +47,13 @@
   <span id="todo-count"><strong>{{remaining }}</strong> items left</span>
 		<ul id="filters">
 			<li>
-				<a class="selected" href="#/">All</a>
+				<a id="all-tasks" class="selected" href="#/">All</a>
 			</li>
 			<li>
-				<a href="#/active">Active</a>
+				<a id="active-tasks" href="#/active">Active</a>
 			</li>
 			<li>
-				<a href="#/completed">Completed</a>
+				<a id="completed-tasks" href="#/completed">Completed</a>
 			</li>
 		</ul>
     {{#if completed}}

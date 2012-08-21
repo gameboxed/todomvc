@@ -8,7 +8,9 @@ class CompleteTasksUseCase
   setInitialTasks: (tasks) =>
     @todoTasks = tasks
 
-  start: =>
+  showAll: =>
+  showActive: =>
+  showCompleted: =>
 
   addNewTask: (task) =>
     @todoTasks.push(task)

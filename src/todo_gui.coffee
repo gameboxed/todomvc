@@ -55,7 +55,8 @@ class WebGui
     element.removeClass("completed")
     element.find("input .toggle").attr("checked", "")
 
-  showAllTasks: (tasks) =>
+  showTasks: (tasks) =>
+    $("#todo-list").html("")
     for task in tasks
       @addNewTask(task)
 
@@ -83,6 +84,13 @@ class WebGui
     data = {remaining: remaining, completed: completed}
     html = template(data)
     element = $(html)
+    element.find("#all-tasks").click => @allTasksClicked()
+    element.find("#active-tasks").click => @remainingTasksClicked()
+    element.find("#completed-tasks").click => @completedTasksClicked()
     console.log("here")
     $("#footer").html(element)
+
+  allTasksClicked: =>
+  completedTasksClicked: =>
+  remainingTasksClicked: =>
 

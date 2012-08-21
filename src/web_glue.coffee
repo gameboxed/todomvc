@@ -3,9 +3,9 @@ class WebGlue
     AutoBind(@gui, @useCase)
     After(@gui, 'enterKeyPressed', (content) => @useCase.addNewTask(new Task(content)))
     After(@useCase, 'addNewTask', @gui.addNewTask)
-    Before(@useCase, 'start',  => @useCase.setInitialTasks(@storage.getTasks()))
-    After(@useCase, 'start',  => @gui.showAllTasks(@useCase.todoTasks))
-    After(@useCase, 'start', => @gui.showStats(@useCase.remainingTasks().length, @useCase.completedTasks().length))
+    Before(@useCase, 'showAll',  => @useCase.setInitialTasks(@storage.getTasks()))
+    After(@useCase, 'showAll',  => @gui.showTasks(@useCase.todoTasks))
+    After(@useCase, 'showAll', => @gui.showStats(@useCase.remainingTasks().length, @useCase.completedTasks().length))
     AfterAll(@useCase,
             [
              'addNewTask',
@@ -38,4 +38,13 @@ class WebGlue
       ],
         => @gui.showStats(@useCase.remainingTasks().length, @useCase.completedTasks().length))
 
+    After(@gui, 'allTasksClicked', => @useCase.showAll())
+    After(@gui, 'completedTasksClicked', => @useCase.showCompleted())
+    After(@gui, 'remainingTasksClicked', => @useCase.showActive())
+
+    After(@useCase, 'showActive', => @gui.showTasks(@useCase.remainingTasks()))
+    After(@useCase, 'showCompleted', => @gui.showTasks(@useCase.completedTasks()))
+
+    LogAll(@useCase)
+    LogAll(@gui)
 

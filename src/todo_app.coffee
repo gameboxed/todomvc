@@ -11,7 +11,7 @@ class WebTodoApp
     gui = new WebGui()
     localStorage = new LocalStorage("todo_app")
     glue = new WebGlue(useCase, gui, localStorage)
-    useCase.start()
+    useCase.showAll()
 
 new WebTodoApp()
 

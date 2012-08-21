@@ -4,6 +4,12 @@ var WebGui,
 WebGui = (function() {
 
   function WebGui() {
+    this.remainingTasksClicked = __bind(this.remainingTasksClicked, this);
+
+    this.completedTasksClicked = __bind(this.completedTasksClicked, this);
+
+    this.allTasksClicked = __bind(this.allTasksClicked, this);
+
     this.showStats = __bind(this.showStats, this);
 
     this.enterKeyPressed = __bind(this.enterKeyPressed, this);
@@ -18,7 +24,7 @@ WebGui = (function() {
 
     this.completeAllTasksClicked = __bind(this.completeAllTasksClicked, this);
 
-    this.showAllTasks = __bind(this.showAllTasks, this);
+    this.showTasks = __bind(this.showTasks, this);
 
     this.uncompleteTask = __bind(this.uncompleteTask, this);
 
@@ -139,8 +145,9 @@ WebGui = (function() {
     return element.find("input .toggle").attr("checked", "");
   };
 
-  WebGui.prototype.showAllTasks = function(tasks) {
+  WebGui.prototype.showTasks = function(tasks) {
     var task, _i, _len, _results;
+    $("#todo-list").html("");
     _results = [];
     for (_i = 0, _len = tasks.length; _i < _len; _i++) {
       task = tasks[_i];
@@ -173,7 +180,8 @@ WebGui = (function() {
   WebGui.prototype.enterKeyPressed = function(content) {};
 
   WebGui.prototype.showStats = function(remaining, completed) {
-    var data, element, html, source, template;
+    var data, element, html, source, template,
+      _this = this;
     source = $("#stats-template").html();
     template = Handlebars.compile(source);
     data = {
@@ -182,9 +190,24 @@ WebGui = (function() {
     };
     html = template(data);
     element = $(html);
+    element.find("#all-tasks").click(function() {
+      return _this.allTasksClicked();
+    });
+    element.find("#active-tasks").click(function() {
+      return _this.remainingTasksClicked();
+    });
+    element.find("#completed-tasks").click(function() {
+      return _this.completedTasksClicked();
+    });
     console.log("here");
     return $("#footer").html(element);
   };
+
+  WebGui.prototype.allTasksClicked = function() {};
+
+  WebGui.prototype.completedTasksClicked = function() {};
+
+  WebGui.prototype.remainingTasksClicked = function() {};
 
   return WebGui;
 

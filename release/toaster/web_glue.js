@@ -12,13 +12,13 @@ WebGlue = (function() {
       return _this.useCase.addNewTask(new Task(content));
     });
     After(this.useCase, 'addNewTask', this.gui.addNewTask);
-    Before(this.useCase, 'start', function() {
+    Before(this.useCase, 'showAll', function() {
       return _this.useCase.setInitialTasks(_this.storage.getTasks());
     });
-    After(this.useCase, 'start', function() {
-      return _this.gui.showAllTasks(_this.useCase.todoTasks);
+    After(this.useCase, 'showAll', function() {
+      return _this.gui.showTasks(_this.useCase.todoTasks);
     });
-    After(this.useCase, 'start', function() {
+    After(this.useCase, 'showAll', function() {
       return _this.gui.showStats(_this.useCase.remainingTasks().length, _this.useCase.completedTasks().length);
     });
     AfterAll(this.useCase, ['addNewTask', 'updateTaskContent', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'], function() {
@@ -34,6 +34,23 @@ WebGlue = (function() {
     AfterAll(this.useCase, ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'], function() {
       return _this.gui.showStats(_this.useCase.remainingTasks().length, _this.useCase.completedTasks().length);
     });
+    After(this.gui, 'allTasksClicked', function() {
+      return _this.useCase.showAll();
+    });
+    After(this.gui, 'completedTasksClicked', function() {
+      return _this.useCase.showCompleted();
+    });
+    After(this.gui, 'remainingTasksClicked', function() {
+      return _this.useCase.showActive();
+    });
+    After(this.useCase, 'showActive', function() {
+      return _this.gui.showTasks(_this.useCase.remainingTasks());
+    });
+    After(this.useCase, 'showCompleted', function() {
+      return _this.gui.showTasks(_this.useCase.completedTasks());
+    });
+    LogAll(this.useCase);
+    LogAll(this.gui);
   }
 
   return WebGlue;

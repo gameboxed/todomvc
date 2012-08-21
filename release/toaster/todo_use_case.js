@@ -20,7 +20,11 @@ CompleteTasksUseCase = (function() {
 
     this.addNewTask = __bind(this.addNewTask, this);
 
-    this.start = __bind(this.start, this);
+    this.showCompleted = __bind(this.showCompleted, this);
+
+    this.showActive = __bind(this.showActive, this);
+
+    this.showAll = __bind(this.showAll, this);
 
     this.setInitialTasks = __bind(this.setInitialTasks, this);
 
@@ -46,7 +50,11 @@ CompleteTasksUseCase = (function() {
     return this.todoTasks = tasks;
   };
 
-  CompleteTasksUseCase.prototype.start = function() {};
+  CompleteTasksUseCase.prototype.showAll = function() {};
+
+  CompleteTasksUseCase.prototype.showActive = function() {};
+
+  CompleteTasksUseCase.prototype.showCompleted = function() {};
 
   CompleteTasksUseCase.prototype.addNewTask = function(task) {
     return this.todoTasks.push(task);
