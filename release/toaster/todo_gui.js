@@ -4,6 +4,8 @@ var WebGui,
 WebGui = (function() {
 
   function WebGui() {
+    this.showStats = __bind(this.showStats, this);
+
     this.enterKeyPressed = __bind(this.enterKeyPressed, this);
 
     this.newTodoContent = __bind(this.newTodoContent, this);
@@ -169,6 +171,20 @@ WebGui = (function() {
   };
 
   WebGui.prototype.enterKeyPressed = function(content) {};
+
+  WebGui.prototype.showStats = function(remaining, completed) {
+    var data, element, html, source, template;
+    source = $("#stats-template").html();
+    template = Handlebars.compile(source);
+    data = {
+      remaining: remaining,
+      completed: completed
+    };
+    html = template(data);
+    element = $(html);
+    console.log("here");
+    return $("#footer").html(element);
+  };
 
   return WebGui;
 

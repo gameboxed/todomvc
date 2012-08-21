@@ -27,6 +27,7 @@ class WebGui
   deleteTaskClicked: (task) =>
   deleteTask: (task) => @findTaskElement(task).remove()
 
+
   editTaskContent: (task) =>
     element = @findTaskElement(task)
     element.addClass("editing").find("input.edit").show().select().focus()
@@ -75,3 +76,13 @@ class WebGui
     $("#new-todo").val()
 
   enterKeyPressed: (content) =>
+
+  showStats: (remaining, completed) =>
+    source = $("#stats-template").html()
+    template = Handlebars.compile(source)
+    data = {remaining: remaining, completed: completed}
+    html = template(data)
+    element = $(html)
+    console.log("here")
+    $("#footer").html(element)
+

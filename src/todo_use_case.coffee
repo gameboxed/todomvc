@@ -2,6 +2,9 @@ class CompleteTasksUseCase
   constructor: ->
     @todoTasks = []
 
+  completedTasks: => @todoTasks.filter (task) -> task.completed
+  remainingTasks: => @todoTasks.filter (task) -> not task.completed
+
   setInitialTasks: (tasks) =>
     @todoTasks = tasks
 

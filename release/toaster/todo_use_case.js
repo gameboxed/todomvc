@@ -23,8 +23,24 @@ CompleteTasksUseCase = (function() {
     this.start = __bind(this.start, this);
 
     this.setInitialTasks = __bind(this.setInitialTasks, this);
+
+    this.remainingTasks = __bind(this.remainingTasks, this);
+
+    this.completedTasks = __bind(this.completedTasks, this);
     this.todoTasks = [];
   }
+
+  CompleteTasksUseCase.prototype.completedTasks = function() {
+    return this.todoTasks.filter(function(task) {
+      return task.completed;
+    });
+  };
+
+  CompleteTasksUseCase.prototype.remainingTasks = function() {
+    return this.todoTasks.filter(function(task) {
+      return !task.completed;
+    });
+  };
 
   CompleteTasksUseCase.prototype.setInitialTasks = function(tasks) {
     return this.todoTasks = tasks;
