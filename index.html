@@ -44,7 +44,13 @@
   </script>
 
 	<script type="x-handlebars-template" id="stats-template">
-  <span id="todo-count"><strong>{{remaining }}</strong> items left</span>
+  <span id="todo-count">
+  {{#if moreThanOne}}
+    <strong>{{remaining }}</strong> items left</span>
+  {{else}}
+    <strong>{{remaining }}</strong> item left</span>
+  {{/if}}
+
 		<ul id="filters">
 			<li>
 				<a id="all-tasks" class="selected" href="#/">All</a>

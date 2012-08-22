@@ -184,12 +184,14 @@ WebGui = (function() {
   WebGui.prototype.enterKeyPressed = function(content) {};
 
   WebGui.prototype.showStats = function(remaining, completed) {
-    var data, element, html, source, template,
+    var data, element, html, moreThanOne, source, template,
       _this = this;
     source = $("#stats-template").html();
     template = Handlebars.compile(source);
+    moreThanOne = remaining > 1;
     data = {
       remaining: remaining,
+      moreThanOne: moreThanOne,
       completed: completed
     };
     html = template(data);

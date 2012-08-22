@@ -18,9 +18,6 @@ WebGlue = (function() {
     After(this.useCase, 'showAll', function() {
       return _this.gui.showTasks(_this.useCase.todoTasks);
     });
-    After(this.useCase, 'showAll', function() {
-      return _this.gui.showStats(_this.useCase.remainingTasks().length, _this.useCase.completedTasks().length);
-    });
     AfterAll(this.useCase, ['addNewTask', 'updateTaskContent', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'], function() {
       return _this.storage.set("tasks", _this.useCase.todoTasks);
     });
@@ -31,7 +28,7 @@ WebGlue = (function() {
     After(this.gui, 'taskContentDoubleClicked', this.useCase.editTaskContent);
     After(this.useCase, 'updateTaskContent', this.gui.updateTaskContent);
     After(this.gui, 'enterKeyPressedWhenEditing', this.useCase.updateTaskContent);
-    AfterAll(this.useCase, ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'], function() {
+    AfterAll(this.useCase, ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion', 'showAll'], function() {
       return _this.gui.showStats(_this.useCase.remainingTasks().length, _this.useCase.completedTasks().length);
     });
     After(this.gui, 'allTasksClicked', function() {

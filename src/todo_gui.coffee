@@ -81,7 +81,8 @@ class WebGui
   showStats: (remaining, completed) =>
     source = $("#stats-template").html()
     template = Handlebars.compile(source)
-    data = {remaining: remaining, completed: completed}
+    moreThanOne = remaining > 1
+    data = {remaining: remaining, moreThanOne: moreThanOne, completed: completed}
     html = template(data)
     element = $(html)
     element.find("#all-tasks").click => @allTasksClicked()

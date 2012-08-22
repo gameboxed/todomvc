@@ -5,7 +5,6 @@ class WebGlue
     After(@useCase, 'addNewTask', @gui.addNewTask)
     Before(@useCase, 'showAll',  => @useCase.setInitialTasks(@storage.getTasks()))
     After(@useCase, 'showAll',  => @gui.showTasks(@useCase.todoTasks))
-    After(@useCase, 'showAll', => @gui.showStats(@useCase.remainingTasks().length, @useCase.completedTasks().length))
     AfterAll(@useCase,
             [
              'addNewTask',
@@ -34,7 +33,8 @@ class WebGlue
         'addNewTask',
         'deleteTask',
         'completeAllTasks',
-        'toggleTaskCompletion'
+        'toggleTaskCompletion',
+        'showAll',
       ],
         => @gui.showStats(@useCase.remainingTasks().length, @useCase.completedTasks().length))
 
