@@ -89,8 +89,15 @@ class WebGui
     element.find("#completed-tasks").click => @completedTasksClicked()
     console.log("here")
     $("#footer").html(element)
+    $("#clear-completed").click => @clearCompletedClicked()
 
   allTasksClicked: =>
   completedTasksClicked: =>
   remainingTasksClicked: =>
+  clearCompletedClicked: =>
+
+  clearCompleted: (tasks)=>
+    console.log("gui.clearCompleted")
+    tasks.each (task) -> @deleteTask(task)
+
 

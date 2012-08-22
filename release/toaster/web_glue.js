@@ -49,6 +49,12 @@ WebGlue = (function() {
     After(this.useCase, 'showCompleted', function() {
       return _this.gui.showTasks(_this.useCase.completedTasks());
     });
+    After(this.gui, 'clearCompletedClicked', function() {
+      return _this.useCase.clearCompleted();
+    });
+    After(this.useCase, 'clearCompleted', function(deletedTasks) {
+      return _this.gui.clearCompleted(deletedTasks);
+    });
     LogAll(this.useCase);
     LogAll(this.gui);
   }

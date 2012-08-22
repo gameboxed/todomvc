@@ -38,6 +38,9 @@ class CompleteTasksUseCase
   uncompleteTask: (task) =>
     task.uncomplete()
 
+  clearCompleted: =>
+    @completedTasks().each (task) => @deleteTask(task)
+
 class Task
   constructor: (@content, @completed=false) ->
 

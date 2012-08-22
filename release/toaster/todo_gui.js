@@ -4,6 +4,10 @@ var WebGui,
 WebGui = (function() {
 
   function WebGui() {
+    this.clearCompleted = __bind(this.clearCompleted, this);
+
+    this.clearCompletedClicked = __bind(this.clearCompletedClicked, this);
+
     this.remainingTasksClicked = __bind(this.remainingTasksClicked, this);
 
     this.completedTasksClicked = __bind(this.completedTasksClicked, this);
@@ -200,7 +204,10 @@ WebGui = (function() {
       return _this.completedTasksClicked();
     });
     console.log("here");
-    return $("#footer").html(element);
+    $("#footer").html(element);
+    return $("#clear-completed").click(function() {
+      return _this.clearCompletedClicked();
+    });
   };
 
   WebGui.prototype.allTasksClicked = function() {};
@@ -208,6 +215,15 @@ WebGui = (function() {
   WebGui.prototype.completedTasksClicked = function() {};
 
   WebGui.prototype.remainingTasksClicked = function() {};
+
+  WebGui.prototype.clearCompletedClicked = function() {};
+
+  WebGui.prototype.clearCompleted = function(tasks) {
+    console.log("gui.clearCompleted");
+    return tasks.each(function(task) {
+      return this.deleteTask(task);
+    });
+  };
 
   return WebGui;
 

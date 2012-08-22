@@ -4,6 +4,8 @@ var CompleteTasksUseCase, Task,
 CompleteTasksUseCase = (function() {
 
   function CompleteTasksUseCase() {
+    this.clearCompleted = __bind(this.clearCompleted, this);
+
     this.uncompleteTask = __bind(this.uncompleteTask, this);
 
     this.completeTask = __bind(this.completeTask, this);
@@ -91,6 +93,13 @@ CompleteTasksUseCase = (function() {
 
   CompleteTasksUseCase.prototype.uncompleteTask = function(task) {
     return task.uncomplete();
+  };
+
+  CompleteTasksUseCase.prototype.clearCompleted = function() {
+    var _this = this;
+    return this.completedTasks().each(function(task) {
+      return _this.deleteTask(task);
+    });
   };
 
   return CompleteTasksUseCase;
