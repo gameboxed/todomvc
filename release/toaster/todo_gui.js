@@ -4,6 +4,8 @@ var WebGui,
 WebGui = (function() {
 
   function WebGui() {
+    this.selectFilter = __bind(this.selectFilter, this);
+
     this.clearCompleted = __bind(this.clearCompleted, this);
 
     this.clearCompletedClicked = __bind(this.clearCompletedClicked, this);
@@ -60,6 +62,15 @@ WebGui = (function() {
     });
     $("#toggle-all").click(function() {
       return _this.completeAllTasksClicked();
+    });
+    $("#all-tasks").click(function() {
+      return _this.allTasksClicked();
+    });
+    $("#active-tasks").click(function() {
+      return _this.remainingTasksClicked();
+    });
+    $("#completed-tasks").click(function() {
+      return _this.completedTasksClicked();
     });
     this.taskElements = [];
   }
@@ -184,7 +195,7 @@ WebGui = (function() {
   WebGui.prototype.enterKeyPressed = function(content) {};
 
   WebGui.prototype.showStats = function(remaining, completed) {
-    var data, element, html, moreThanOne, source, template,
+    var data, html, moreThanOne, source, template,
       _this = this;
     source = $("#stats-template").html();
     template = Handlebars.compile(source);
@@ -195,18 +206,8 @@ WebGui = (function() {
       completed: completed
     };
     html = template(data);
-    element = $(html);
-    element.find("#all-tasks").click(function() {
-      return _this.allTasksClicked();
-    });
-    element.find("#active-tasks").click(function() {
-      return _this.remainingTasksClicked();
-    });
-    element.find("#completed-tasks").click(function() {
-      return _this.completedTasksClicked();
-    });
-    console.log("here");
-    $("#footer").html(element);
+    $("#todo-count, #clear-completed").remove();
+    $("#footer").append(html);
     return $("#clear-completed").click(function() {
       return _this.clearCompletedClicked();
     });
@@ -225,6 +226,11 @@ WebGui = (function() {
     return tasks.each(function(task) {
       return this.deleteTask(task);
     });
+  };
+
+  WebGui.prototype.selectFilter = function(name) {
+    $("#filters a").removeClass("selected");
+    return $("#" + name + "-tasks").addClass("selected");
   };
 
   return WebGui;

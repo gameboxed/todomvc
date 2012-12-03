@@ -2,9 +2,9 @@ class WebGlue
   constructor: (@useCase, @gui, @storage)->
     AutoBind(@gui, @useCase)
     After(@gui, 'enterKeyPressed', (content) => @useCase.addNewTask(new Task(content)))
-    After(@useCase, 'addNewTask', @gui.addNewTask)
-    Before(@useCase, 'showAll',  => @useCase.setInitialTasks(@storage.getTasks()))
-    After(@useCase, 'showAll',  => @gui.showTasks(@useCase.todoTasks))
+    After(@useCase, 'addNewTask', => @gui.showTasks(@useCase.filteredTasks()))
+    Before(@useCase, 'showFiltered',  => @useCase.setInitialTasks(@storage.getTasks()))
+    After(@useCase, 'showFiltered',  => @gui.showTasks(@useCase.filteredTasks()))
     AfterAll(@useCase,
             [
              'addNewTask',
@@ -34,16 +34,23 @@ class WebGlue
         'deleteTask',
         'completeAllTasks',
         'toggleTaskCompletion',
-        'showAll',
+        'showFiltered',
       ],
         => @gui.showStats(@useCase.remainingTasks().length, @useCase.completedTasks().length))
 
-    After(@gui, 'allTasksClicked', => @useCase.showAll())
-    After(@gui, 'completedTasksClicked', => @useCase.showCompleted())
-    After(@gui, 'remainingTasksClicked', => @useCase.showActive())
+    After(@gui, 'allTasksClicked', => @useCase.selectFilter("all"))
+    After(@gui, 'completedTasksClicked', => @useCase.selectFilter("completed"))
+    After(@gui, 'remainingTasksClicked', => @useCase.selectFilter("active"))
+    AfterAll(@gui,
+      [
+        'allTasksClicked',
+        'completedTasksClicked',
+        'remainingTasksClicked'
+      ],
+        => @useCase.showFiltered())
 
-    After(@useCase, 'showActive', => @gui.showTasks(@useCase.remainingTasks()))
-    After(@useCase, 'showCompleted', => @gui.showTasks(@useCase.completedTasks()))
+    After(@useCase, 'showFiltered', => @gui.showTasks(@useCase.filteredTasks()))
+    After(@useCase, 'showFiltered', => @gui.selectFilter(@useCase.filter))
 
     After(@gui, 'clearCompletedClicked', => @useCase.clearCompleted())
     After(@useCase, 'clearCompleted', (deletedTasks) => @gui.clearCompleted(deletedTasks))

@@ -11,12 +11,14 @@ WebGlue = (function() {
     After(this.gui, 'enterKeyPressed', function(content) {
       return _this.useCase.addNewTask(new Task(content));
     });
-    After(this.useCase, 'addNewTask', this.gui.addNewTask);
-    Before(this.useCase, 'showAll', function() {
+    After(this.useCase, 'addNewTask', function() {
+      return _this.gui.showTasks(_this.useCase.filteredTasks());
+    });
+    Before(this.useCase, 'showFiltered', function() {
       return _this.useCase.setInitialTasks(_this.storage.getTasks());
     });
-    After(this.useCase, 'showAll', function() {
-      return _this.gui.showTasks(_this.useCase.todoTasks);
+    After(this.useCase, 'showFiltered', function() {
+      return _this.gui.showTasks(_this.useCase.filteredTasks());
     });
     AfterAll(this.useCase, ['addNewTask', 'updateTaskContent', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion'], function() {
       return _this.storage.set("tasks", _this.useCase.todoTasks);
@@ -28,23 +30,26 @@ WebGlue = (function() {
     After(this.gui, 'taskContentDoubleClicked', this.useCase.editTaskContent);
     After(this.useCase, 'updateTaskContent', this.gui.updateTaskContent);
     After(this.gui, 'enterKeyPressedWhenEditing', this.useCase.updateTaskContent);
-    AfterAll(this.useCase, ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion', 'showAll'], function() {
+    AfterAll(this.useCase, ['addNewTask', 'deleteTask', 'completeAllTasks', 'toggleTaskCompletion', 'showFiltered'], function() {
       return _this.gui.showStats(_this.useCase.remainingTasks().length, _this.useCase.completedTasks().length);
     });
     After(this.gui, 'allTasksClicked', function() {
-      return _this.useCase.showAll();
+      return _this.useCase.selectFilter("all");
     });
     After(this.gui, 'completedTasksClicked', function() {
-      return _this.useCase.showCompleted();
+      return _this.useCase.selectFilter("completed");
     });
     After(this.gui, 'remainingTasksClicked', function() {
-      return _this.useCase.showActive();
+      return _this.useCase.selectFilter("active");
     });
-    After(this.useCase, 'showActive', function() {
-      return _this.gui.showTasks(_this.useCase.remainingTasks());
+    AfterAll(this.gui, ['allTasksClicked', 'completedTasksClicked', 'remainingTasksClicked'], function() {
+      return _this.useCase.showFiltered();
     });
-    After(this.useCase, 'showCompleted', function() {
-      return _this.gui.showTasks(_this.useCase.completedTasks());
+    After(this.useCase, 'showFiltered', function() {
+      return _this.gui.showTasks(_this.useCase.filteredTasks());
+    });
+    After(this.useCase, 'showFiltered', function() {
+      return _this.gui.selectFilter(_this.useCase.filter);
     });
     After(this.gui, 'clearCompletedClicked', function() {
       return _this.useCase.clearCompleted();
