@@ -20,7 +20,19 @@
 			<label for="toggle-all">Mark all as complete</label>
 			<ul id="todo-list"></ul>
 		</section>
-		<footer id="footer"></div>
+		<footer id="footer">
+			<ul id="filters">
+				<li>
+					<a id="all-tasks" class="selected" href="#/">All</a>
+				</li>
+				<li>
+					<a id="active-tasks" href="#/active">Active</a>
+				</li>
+				<li>
+					<a id="completed-tasks" href="#/completed">Completed</a>
+				</li>
+			</ul>
+		</footer>
 	</section>
 
   <script type="x-handlebars-template" id="todo-template">
@@ -50,18 +62,6 @@
   {{else}}
     <strong>{{remaining }}</strong> item left</span>
   {{/if}}
-
-		<ul id="filters">
-			<li>
-				<a id="all-tasks" class="selected" href="#/">All</a>
-			</li>
-			<li>
-				<a id="active-tasks" href="#/active">Active</a>
-			</li>
-			<li>
-				<a id="completed-tasks" href="#/completed">Completed</a>
-			</li>
-		</ul>
     {{#if completed}}
     <button id="clear-completed">Clear completed ({{completed}})</button>
     {{/if}}
